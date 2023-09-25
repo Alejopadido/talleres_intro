@@ -1,3 +1,7 @@
+// Integrantes:
+// - Alejandro Parrado
+// - Sebastian Vargas Casquete
+
 #include <iostream>
 #include <fstream>
 
@@ -10,13 +14,17 @@ const int PROPIEDADES_POR_LIBRO = 4;
 int leerDatosDeEntradaDelArchivoTxt(int libros[][PROPIEDADES_POR_LIBRO]);
 int sell(int libros[][PROPIEDADES_POR_LIBRO], int numLibro, int numLibros);
 void guardarCambios(int libros[][PROPIEDADES_POR_LIBRO], int numLibros);
+void list_one(int numLibro, int precio, int cantidadInv);
+void menu(int libros[][PROPIEDADES_POR_LIBRO], int numLibros);
 
 // es la funcion main
 int main() {
     int libros[MAX_LIBROS][PROPIEDADES_POR_LIBRO];
-
     int numLibros = leerDatosDeEntradaDelArchivoTxt(libros);
-    sell(libros, 3, numLibros);
+
+    menu(libros, numLibros);
+
+   // sell(libros, 3, numLibros);
 }
 
 //Es la funcion leerDatosDeEntradaDelArchivoTxt
@@ -35,6 +43,7 @@ int leerDatosDeEntradaDelArchivoTxt(int libros[][PROPIEDADES_POR_LIBRO]) {
         for (int j = 0; j < PROPIEDADES_POR_LIBRO; j++) {
             entrada >> libros[i][j];
         }
+        list_one(i, libros[i][1], libros[i][2]);
     }
 
     return cantidadLibros;
@@ -71,4 +80,56 @@ void guardarCambios(int libros[][PROPIEDADES_POR_LIBRO], int numLibros){
         }
         salida << "\n";
     }
+}
+
+void list_one(int numLibro, int precio, int cantidadInv)
+{
+    cout<<"Libro: " << numLibro << "\n"<<
+    "Precio: " << precio << "\n"<<
+    "Cantidad en el Inventario: " << cantidadInv << "\n";
+}
+
+void menu(int libros[][PROPIEDADES_POR_LIBRO], int numLibros){
+   bool salio = false;
+   while (!salio)
+   {
+     cout << "\n" <<
+    "L: Listar toda la información del inventario" << "\n" <<
+    "D: Introduce una remesa de libros en el inventario" << "\n" <<
+    "R: Genera un informe diario de ventas" << "\n" <<
+    "S: vender un libro" << "\n" <<
+    "Q: Salir del Programa" << "\n"
+    <<"Inserte un comando: ";
+    char opcion;
+    cin >> opcion;
+
+    switch (opcion)
+    {
+    case 'L':
+        cout<<"se ha entrado en la funcion list_all";
+        break;
+    case 'D':
+        cout<<"se ha entrado en la funcion de Remesa";
+        break;
+    case 'R':
+        cout<<"se ha entrado en la funcion generar_informe_de_ventas";
+        break;
+    case 'S':
+        cout<<"se ha entrado en la funcion Sell, Inserte el numero del libro: ";
+        int nlib;
+        cin>>nlib;
+        nlib--;
+        sell(libros, nlib, numLibros);
+        salio = true;
+        break;   
+    case 'Q':
+        cout<<"saliendo del programa";
+        salio = true;
+        break;
+    default:
+        cout<<"Opcion invalida";
+        break;
+    }
+   }
+   
 }

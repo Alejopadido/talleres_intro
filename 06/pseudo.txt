@@ -1,0 +1,13 @@
+numero_buscado = 1;
+aplausos;
+numero_actual = 0;
+
+while (cartas[numero_actual] != n_cartas) {
+	if (cartas[numero_actual] != numero_buscado)
+	{
+	    if (numero_actual + 1 = n_cartas)
+	    	numero_actual = 0;
+            aplausos++;
+	    numero_actual++
+	}
+}
